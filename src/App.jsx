@@ -1,4 +1,4 @@
-import Admin from './Admin';
+import Admin from './components/Admin';
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
