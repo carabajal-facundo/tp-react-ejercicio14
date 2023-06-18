@@ -33,6 +33,12 @@ const Admin = () => {
     handleClose();
   };
 
+  const borrarReceta = (nombreReceta)=> {
+    let copiaRecetas = recetas.filter((receta) => receta !== nombreReceta);
+    setRecetas(copiaRecetas);
+
+  }
+
   return (
     <div className="container my-5">
       <h1 className="mb-3">Administrador de recetas</h1>
@@ -114,7 +120,7 @@ const Admin = () => {
                 <Button variant="warning" onClick={handleShow}>
                   Editar
                 </Button>
-                <Button variant="danger">Borrar</Button>
+                <Button variant="danger" onClick={() => borrarReceta(receta)}>Borrar</Button>
               </td>
             </tr>
           ))}
