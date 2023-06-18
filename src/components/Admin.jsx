@@ -24,8 +24,9 @@ const Admin = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    setRecetas([...recetas, receta]);
-    localStorage.setItem("recetas", JSON.stringify(recetas));
+    const recetasUpdated = [...recetas, receta];
+    localStorage.setItem("recetas", JSON.stringify(recetasUpdated));
+    setRecetas(recetasUpdated);
     handleClose();
   };
 
