@@ -22,11 +22,6 @@ const Admin = () => {
       [id]: value
     }));
   };
-  const borrarReceta = (id) => {
-    const newRecetas = recetas.filter((receta) => receta.id !== id);
-    setRecetas(newRecetas);
-    localStorage.setItem('recetas', JSON.stringify(newRecetas));
-  }
   const handleSubmit = (e) => {
     e.preventDefault();
     setRecetas([...recetas, receta]);
