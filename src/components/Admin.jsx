@@ -3,12 +3,13 @@ import { useState } from "react";
 
 const Admin = () => {
   const [show, setShow] = useState(false);
-  const [receta, setReceta] = useState({
+  const initialRecetaState = {
     nombre: "",
     ingredientes: "",
     pasos: "",
     imagen: ""
-  });
+  };
+  const [receta, setReceta] = useState(initialRecetaState);
   let recetasLocalStorage = JSON.parse(localStorage.getItem('recetas')) || [];
   const [recetas, setRecetas] = useState(recetasLocalStorage);
 
@@ -22,11 +23,13 @@ const Admin = () => {
       [id]: value
     }));
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const recetasUpdated = [...recetas, receta];
     localStorage.setItem("recetas", JSON.stringify(recetasUpdated));
     setRecetas(recetasUpdated);
+    setReceta(initialRecetaState);
     handleClose();
   };
 
@@ -87,45 +90,36 @@ const Admin = () => {
             </Button>
           </Form>
         </Modal.Body>
-      </Modal>        
-        <Table striped bordered hover responsive className="my-3">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Receta</th>
-              <th>Ingredientes</th>
-              <th>Pasos</th>
-              <th>Imagen</th>
-              <th>Acciones</th>
+      </Modal>
+      <Table striped bordered hover responsive className="my-3">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Receta</th>
+            <th>Ingredientes</th>
+            <th>Pasos</th>
+            <th>Imagen</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {recetas.map((receta, index) => (
+            <tr key={index}>
+              <td>{index + 1}</td>
+              <td>{receta.nombre}</td>
+              <td className="text-truncate ancho">{receta.ingredientes}</td>
+              <td className="text-truncate ancho">{receta.pasos}</td>
+              <td className="text-truncate ancho">{receta.imagen}</td>
+              <td className="d-flex justify-content-evenly">
+                <Button variant="warning" onClick={handleShow}>
+                  Editar
+                </Button>
+                <Button variant="danger">Borrar</Button>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>Arroz con pollo</td>
-              <td className="text-truncate ancho">Arroz, pollo, queso, leche, aceite, mantequilla</td>
-              <td className="text-truncate ancho">1. Hornear 2.Cocinar 3. Servir</td>
-              <td className="text-truncate ancho">https://upload.wikimedia.org/wikipedia/commons/3/39/Arroz-con-Pollo.jpg</td>
-              <td className="d-flex justify-content-evenly"><Button variant="warning" onClick={handleShow}>Editar</Button><Button variant="danger" >Borrar</Button></td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Empanadas</td>
-              <td className="text-truncate ancho">Carne picada, picante, tapas para empanada</td>
-              <td className="text-truncate ancho">1. Cortar la carne 2. Cocinar 3. Comer</td>
-              <td className="text-truncate ancho">https://assets.bonappetit.com/photos/58a34e1df12ac6e639bf24ae/1:1/w_2812,h_2812,c_limit/argentinian-beef-empanadas.jpg</td>
-              <td className="d-flex justify-content-evenly"><Button variant="warning" onClick={handleShow}>Editar</Button><Button variant="danger">Borrar</Button></td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Humita</td>
-              <td className="text-truncate ancho">Choclo rallado, queso, aji</td>
-              <td className="text-truncate ancho">1. Rallar el choclo 2. Hervir 3. Servir caliente</td>
-              <td className="text-truncate ancho">https://canalcocina.es/medias/images/1403SorLuciaHumita.jpg</td>
-              <td className="d-flex justify-content-evenly"><Button variant="warning" onClick={handleShow}>Editar</Button><Button variant="danger">Borrar</Button></td>
-            </tr>
-          </tbody>
-        </Table>
+          ))}
+        </tbody>
+      </Table>
     </div>
   );
 };
