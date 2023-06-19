@@ -12,12 +12,18 @@ const Admin = () => {
   const [receta, setReceta] = useState(initialRecetaState);
   const [recetas, setRecetas] = useState([]);
 
+  // Move the initialization inside the useEffect hook
+  useEffect(() => {
+    let recetasLocalStorage = JSON.parse(localStorage.getItem("recetas")) || [];
+    setRecetas(recetasLocalStorage);
+  }, []);
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   useEffect(() => {
-    console.log('Aquí debería guardar en local storage')
-  })
+    localStorage.setItem("recetas", JSON.stringify(recetas));
+  }, [recetas]);
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
