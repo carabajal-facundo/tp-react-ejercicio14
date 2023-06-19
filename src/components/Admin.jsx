@@ -9,14 +9,9 @@ const Admin = () => {
     pasos: "",
     imagen: "",
   };
+  let recetasLocalStorage = JSON.parse(localStorage.getItem("recetas")) || [];
   const [receta, setReceta] = useState(initialRecetaState);
-  const [recetas, setRecetas] = useState([]);
-
-  // Move the initialization inside the useEffect hook
-  useEffect(() => {
-    let recetasLocalStorage = JSON.parse(localStorage.getItem("recetas")) || [];
-    setRecetas(recetasLocalStorage);
-  }, []);
+  const [recetas, setRecetas] = useState(recetasLocalStorage);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
