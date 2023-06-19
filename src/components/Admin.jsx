@@ -1,5 +1,5 @@
 import { Table, Button, Modal, Form } from "react-bootstrap";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Admin = () => {
   const [show, setShow] = useState(false);
@@ -7,37 +7,38 @@ const Admin = () => {
     nombre: "",
     ingredientes: "",
     pasos: "",
-    imagen: ""
+    imagen: "",
   };
   const [receta, setReceta] = useState(initialRecetaState);
-  let recetasLocalStorage = JSON.parse(localStorage.getItem('recetas')) || [];
-  const [recetas, setRecetas] = useState(recetasLocalStorage);
+  const [recetas, setRecetas] = useState([]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  useEffect(() => {
+    console.log('Aquí debería guardar en local storage')
+  })
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setReceta((prevReceta) => ({
       ...prevReceta,
-      [id]: value
+      [id]: value,
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const recetasUpdated = [...recetas, receta];
-    localStorage.setItem("recetas", JSON.stringify(recetasUpdated));
     setRecetas(recetasUpdated);
     setReceta(initialRecetaState);
     handleClose();
   };
 
-  const borrarReceta = (nombreReceta)=> {
+  const borrarReceta = (nombreReceta) => {
     let copiaRecetas = recetas.filter((receta) => receta !== nombreReceta);
     setRecetas(copiaRecetas);
-
-  }
+  };
 
   return (
     <div className="container my-5">
@@ -120,7 +121,9 @@ const Admin = () => {
                 <Button variant="warning" onClick={handleShow}>
                   Editar
                 </Button>
-                <Button variant="danger" onClick={() => borrarReceta(receta)}>Borrar</Button>
+                <Button variant="danger" onClick={() => borrarReceta(receta)}>
+                  Borrar
+                </Button>
               </td>
             </tr>
           ))}
