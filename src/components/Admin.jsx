@@ -20,6 +20,9 @@ const Admin = () => {
     localStorage.setItem("recetas", JSON.stringify(recetas));
   }, [recetas]);
 
+  const [modifica, setModifica] = useState(false);
+  const [indice, setIndice] = useState('');
+
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setReceta((prevReceta) => ({
@@ -30,15 +33,34 @@ const Admin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const recetasUpdated = [...recetas, receta];
-    setRecetas(recetasUpdated);
-    setReceta(initialRecetaState);
-    handleClose();
+    if (!modifica){
+      const recetasUpdated = [...recetas, receta];
+      setRecetas(recetasUpdated);
+      setReceta(initialRecetaState);
+      setModifica(false);
+      handleClose();
+    }
+    else{
+      let copiaRecetas = recetas;
+      copiaRecetas[indice] = receta;
+      setRecetas(copiaRecetas);
+      localStorage.setItem("recetas", JSON.stringify(recetas));
+      setReceta(initialRecetaState);
+      setModifica(false);
+      handleClose();
+    }
   };
 
   const borrarReceta = (nombreReceta) => {
     let copiaRecetas = recetas.filter((receta) => receta !== nombreReceta);
     setRecetas(copiaRecetas);
+  };
+
+  const modReceta = (objReceta, indice) => {
+    setReceta(objReceta);
+    setIndice(indice);
+    setModifica(true);
+    handleShow();
   };
 
   return (
@@ -119,7 +141,7 @@ const Admin = () => {
               <td className="text-truncate ancho">{receta.pasos}</td>
               <td className="text-truncate ancho">{receta.imagen}</td>
               <td className="d-flex justify-content-evenly">
-                <Button variant="warning" onClick={handleShow}>
+                <Button variant="warning" onClick={() => modReceta(receta, index)}>
                   Editar
                 </Button>
                 <Button variant="danger" onClick={() => borrarReceta(receta)}>
