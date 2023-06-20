@@ -10,6 +10,7 @@ function App() {
       <NavBar></NavBar>
         <Routes>
           <Route exact path="/" element={<Admin></Admin>}></Route>
+          <Route exact path="/detalle" element={<Detalle></Detalle>}></Route>
           <Route path="*" element={<Admin></Admin>}></Route>
         </Routes>
     </BrowserRouter>
