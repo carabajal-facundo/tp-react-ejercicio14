@@ -1,6 +1,6 @@
 import { Table, Button, Modal, Form } from "react-bootstrap";
 import { useState, useEffect } from "react";
-
+import Index from "./Index";
 const Admin = () => {
   const [show, setShow] = useState(false);
   const initialRecetaState = {
