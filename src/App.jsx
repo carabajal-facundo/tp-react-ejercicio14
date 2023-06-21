@@ -12,14 +12,10 @@ function App() {
       <NavBar></NavBar>
         <Routes>
           <Route exact path="/administrador" element={<Admin></Admin>}></Route>
-          <Route exact path="/detalle" element={<Detalle></Detalle>}></Route>
           <Route exact path="/" element={<Index></Index>}></Route>
           <Route path="*" element={<Index></Index>}></Route>
         </Routes>
     </BrowserRouter>
-
-    // <NavBar></NavBar>
-    // <Admin></Admin>
   )
 }
 

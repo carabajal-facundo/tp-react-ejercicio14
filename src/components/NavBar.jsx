@@ -8,8 +8,8 @@ const NavBar = () => {
         <Container>
           <Navbar.Brand as={Link} to='/Index'>Blog-Cocina</Navbar.Brand>
           <Nav className="me-auto">
+            <NavLink end to={'/'} className='nav-item nav-link'>Inicio</NavLink>
             <NavLink end to={'/administrador'} className='nav-item nav-link'>Arministrador</NavLink>
-            <NavLink end to={'/detalle'} className='nav-item nav-link'>Detalle</NavLink>
           </Nav>
         </Container>
       </Navbar>
