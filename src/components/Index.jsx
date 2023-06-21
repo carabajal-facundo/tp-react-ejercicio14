@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Card,Button } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import "../App.css"
+import { Link } from "react-router-dom";
 const AdminChild = () => {
   const [recetas, setRecetas] = useState([]);
 
@@ -19,7 +20,7 @@ const AdminChild = () => {
           <Card.Img variant="top" src={receta.imagen} />
           <Card.Body>
             <Card.Title>{receta.nombre}</Card.Title>
-            <Button variant="warning">Ver Mas</Button>
+            <Link className='btn btn-warning' to={'/detalle/'+receta.nombre}>Ver Mas</Link>
           </Card.Body>
         </Card>
       ))}
