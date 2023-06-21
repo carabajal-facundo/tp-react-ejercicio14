@@ -1,7 +1,7 @@
 import Admin from './components/Admin';
+import Detalle from './components/Detalle'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Detalle from './assets/components/pages/Detalle';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 
